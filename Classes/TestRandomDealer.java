@@ -9,9 +9,8 @@ public class TestRandomDealer {
     {
         int numPlayers = 6;
         for(int i =0; i < 100; i++) {
-            Random rand = new Random();
-            int num = rand.nextInt((numPlayers) + 1) + 1;
-            System.out.println(num);
+            STCardGame game = new STCardGame(numPlayers);
+            game.selectDealer();
         }
 
     }

@@ -19,8 +19,13 @@ public class STCardGame {
     public void selectDealer()
     {
         Random rand = new Random();
-        int randomNum = rand.nextInt((numPlayers) + 1) + 1;
+        int randomNum = rand.nextInt(numPlayers) + 1;
         dealerID = randomNum;
+
+        if (dealerID == 1)
+            System.out.println("You are the dealer");
+        else
+            System.out.println("Dealer is player " + dealerID);
     }
 
 

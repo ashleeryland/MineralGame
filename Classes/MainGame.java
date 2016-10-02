@@ -46,8 +46,8 @@ public class MainGame
         System.out.print("Number of Players: ");
         numPlayers = input.nextInt();
 
-        while (numPlayers <2 || numPlayers >6) {
-            System.out.println("Invalid number of players. Must be 2 to 6 players");
+        while (numPlayers <3 || numPlayers >6) {
+            System.out.println("Invalid number of players. Must be 3 to 6 players");
             numPlayers= input.nextInt();
         }
 
@@ -72,8 +72,8 @@ public class MainGame
     private static void showMenu()
     {
         System.out.println("Game Menu:");
-        System.out.println("  * Start a new game    = 1");
-        System.out.println("  * Exit game           = 2");
+        System.out.println("  1 = Start a new game");
+        System.out.println("  2 = Exit game");
     }
 
     private static void showWelcome()
