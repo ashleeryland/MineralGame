@@ -15,7 +15,7 @@ public class STDeck {
 
         for (int i = 0; i < NUM_CARDS_INIT; i++) {
             cards.add(new STCard());
-            //google how to create random array of integers
+            //TODO: google how to create random array of integers
         }
 
     }

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Ashlee Ryland on 12/09/2016.
@@ -17,10 +18,9 @@ public class STCardGame {
 
     public void selectDealer()
     {
-        //todo; get a random into in java for dealer
-        //between 1 a numplayers
-        //test value
-        dealerID = 1;
+        Random rand = new Random();
+        int randomNum = rand.nextInt((numPlayers) + 1) + 1;
+        dealerID = randomNum;
     }
 
 
@@ -30,7 +30,7 @@ public class STCardGame {
 
         for (STPlayer player : players){
             ArrayList<STCard> card = deck.dealCards(NUM_CARDS_TO_DEAL);
-//            player.getsCards();
+            player.getsCards();
         }
     }
 }

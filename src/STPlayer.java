@@ -4,4 +4,6 @@
 public class STPlayer
 {
 
+    public void getsCards() {
+    }
 }
