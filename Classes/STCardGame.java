@@ -16,6 +16,8 @@ public class STCardGame {
         this.numPlayers = numPlayers;
     }
 
+
+    //selects a random dealer between 1 and the bnumber of players, then displays to user
     public void selectDealer()
     {
         Random rand = new Random();

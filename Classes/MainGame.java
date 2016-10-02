@@ -31,6 +31,7 @@ public class MainGame
         return name;
     }
 
+    //method to start a new game
     private static void startNewGame()
     {
         int numPlayers = getNumPlayers();
@@ -39,6 +40,7 @@ public class MainGame
         game.dealRandCardsToPlayers();
     }
 
+    //user selects amount of players. Must be between 3 and 6
     private static int getNumPlayers()
     {
         int numPlayers;
@@ -50,11 +52,10 @@ public class MainGame
             System.out.println("Invalid number of players. Must be 3 to 6 players");
             numPlayers= input.nextInt();
         }
-
         return numPlayers;
     }
 
-
+    //users menu choice. Currently can only select 1 or 2 to start of exit game
     private static int userMenuChoice()
     {
         int menuChoice;
@@ -68,6 +69,7 @@ public class MainGame
         return menuChoice;
 
     }
+
 
     private static void showMenu()
     {
