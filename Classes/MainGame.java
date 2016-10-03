@@ -17,8 +17,9 @@ public class MainGame
     private static ArrayList<STPlayer> players = new ArrayList<STPlayer>();
     private static int dealerID;
 
-    private static ArrayList<Integer> pile;
+    public static ArrayList<Integer> pile;
     private static int playersTurn;
+    private static int keyElement;
 
     public static void main(String[] args) {
         STDeck deck = new STDeck();
@@ -42,7 +43,25 @@ public class MainGame
 
         boolean gameOver = false;
 
-        while(!gameOver){
+        pile = new ArrayList<Integer>();
+        playersTurn = dealerID+1;
+        keyElement = 7;
+
+        while(gameOver){
+
+            if(playersTurn!=0) {
+
+                players.get(playersTurn).takeTurn(keyElement, pile, deck);
+            }
+
+            if(players.get(playersTurn).getHandSize()==0){
+                gameOver = true;
+            }
+
+            playersTurn +=1;
+            if(playersTurn>numPlayers){
+                playersTurn =0;
+            }
 
         }
 

@@ -29,6 +29,39 @@ public  class STPlayer
 
     }
 
+    public void takeTurn(int keyElement, ArrayList<Integer> pile, STDeck deck){
+
+        int currentLeadingCard = 0;
+        int leadingCardVariable = 0;
+
+        if(pile.size()==0){
+
+            leadingCardVariable = 100;
+
+            for( int i=0; i<hand.size(); i++){
+                if(deck.cards[hand.get(i)][2]=="Trump") {
+                    if (Integer.parseInt(deck.cards[hand.get(i)][keyElement]) < leadingCardVariable) {
+                        currentLeadingCard = hand.get(i);
+                        leadingCardVariable = Integer.parseInt(deck.cards[hand.get(i)][keyElement]);
+
+                    }
+                }
+            }
+
+            pile.add(currentLeadingCard);
+            hand.remove(currentLeadingCard);
+
+        }else {
+
+            ArrayList<Integer>ShortList
+
+            for (int i = 0; i < hand.size(); i++) {
+
+
+            }
+        }
+    }
+
     public  void showHand(){
 
         for(int i = 0; i<hand.size(); i++){
