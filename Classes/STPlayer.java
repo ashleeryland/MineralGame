@@ -40,15 +40,13 @@ public  class STPlayer
             leadingCardVariable = 100;
 
             for( int i=0; i<hand.size(); i++){
-                if(deck.cards[hand.get(i)][2]!="Trump") {
-                    System.out.println("card "+ hand.get(i) + " with a value of "+ deck.cards[hand.get(i)][keyElement]);
+                if(deck.cards[hand.get(i)][1]!="TRUMP") {
                     if (Double.parseDouble(deck.cards[hand.get(i)][keyElement]) < leadingCardVariable) {
                         currentLeadingCard = hand.get(i);
                         leadingCardPosition = i;
                         leadingCardVariable = Double.parseDouble(deck.cards[hand.get(i)][keyElement]);
 
                     }
-                   System.out.println(Double.parseDouble(deck.cards[hand.get(i)][keyElement]));
                 }
             }
 
@@ -61,9 +59,10 @@ public  class STPlayer
             ArrayList<Integer>ShortList = new ArrayList<Integer>();
             ArrayList<Integer>TrumpList = new ArrayList<Integer>();
 
+
             for (int i = 0; i < hand.size(); i++) {
-                if(deck.cards[hand.get(i)][2]!="Trump"){
-                    if(Double.parseDouble(deck.cards[hand.get(i)][keyElement]) > pile.get(pile.size()-1)){
+                if(deck.cards[hand.get(i)][1]!="TRUMP"){
+                    if(Double.parseDouble(deck.cards[hand.get(i)][keyElement]) > Double.parseDouble(deck.cards[pile.get(pile.size()-1)][keyElement])){
                         ShortList.add(i);
                     }
                 }else{
@@ -84,7 +83,7 @@ public  class STPlayer
 
                 }
                 pile.add(currentLeadingCard);
-                hand.remove(currentLeadingCard);
+                hand.remove(leadingCardPosition);
                 System.out.println("Player played card "+currentLeadingCard+" score to beat is" + leadingCardVariable);
 
             }else{
@@ -95,6 +94,7 @@ public  class STPlayer
                     System.out.println("Played a Trump");
                 }else{
                     getsCard(deck);
+                    
                 }
 
 

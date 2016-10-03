@@ -45,7 +45,7 @@ public class MainGame
 
         pile = new ArrayList<Integer>();
         playersTurn = 1;
-        if(playersTurn>numPlayers){
+        if(playersTurn>numPlayers-1){
             playersTurn =0;
         }
         keyElement = 6;
@@ -56,14 +56,19 @@ public class MainGame
             if(playersTurn!=0) {
 
                 players.get(playersTurn).takeTurn(keyElement, pile, deck);
+            }else{
+                System.out.println("Your Turn");
             }
 
             if(players.get(playersTurn).getHandSize()==0){
                 gameOver = true;
+                System.out.println("Gameover");
             }
 
             playersTurn +=1;
+
             if(playersTurn>numPlayers-1){
+
                 playersTurn =0;
             }
 
