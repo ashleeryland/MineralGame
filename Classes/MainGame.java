@@ -29,7 +29,7 @@ public class MainGame
         int choice = userMenuChoice();
         if (choice == NEW_GAME) {
 
-            startNewGame(deck);
+            numPlayers = startNewGame(deck);
 
             showHand(0,players);
 
@@ -44,11 +44,15 @@ public class MainGame
         boolean gameOver = false;
 
         pile = new ArrayList<Integer>();
-        playersTurn = dealerID+1;
-        keyElement = 7;
+        playersTurn = 1;
+        if(playersTurn>numPlayers){
+            playersTurn =0;
+        }
+        keyElement = 6;
 
-        while(gameOver){
+        while(!gameOver){
 
+            //
             if(playersTurn!=0) {
 
                 players.get(playersTurn).takeTurn(keyElement, pile, deck);
@@ -59,7 +63,7 @@ public class MainGame
             }
 
             playersTurn +=1;
-            if(playersTurn>numPlayers){
+            if(playersTurn>numPlayers-1){
                 playersTurn =0;
             }
 
@@ -77,7 +81,7 @@ public class MainGame
     }
 
     //method to start a new game
-    private static void startNewGame(STDeck deck)
+    private static int startNewGame(STDeck deck)
     {
         STPlayer newPlayer;
         int numPlayers = getNumPlayers();
@@ -91,6 +95,7 @@ public class MainGame
         }
 
         dealerID = selectDealer(numPlayers);
+        return numPlayers;
 
     }
 
