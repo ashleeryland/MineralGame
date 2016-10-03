@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class STDeck {
     private static final int NUM_CARDS_INIT = 60;
-    private String[][] cards;
+    public String[][] cards = new String[60][12];
 
 
     //todo; List of all cards
@@ -24,23 +24,31 @@ public class STDeck {
         BufferedReader reader = new BufferedReader(deckDoc);
         String line = new String();
 
-        for (int i = 0; i < NUM_CARDS_INIT; i++) {
-            line = reader.readLine();
-            String[] currentLine = line.split(",");
-            for (int j = 0; j < 12; j++){
-                if (j < 11){
-                    cards[i][j] = currentLine[j];
-                }else{
-                    cards[i][11]="false";
+        try {
+            for (int i = 0; i < NUM_CARDS_INIT; i++) {
+                line = reader.readLine();
+                String[] currentLine = line.split(",");
+                for (int j = 0; j < 12; j++) {
+                    if (j < 11) {
+                        cards[i][j] = currentLine[j];
+                    } else {
+                        cards[i][11] = "false";
+                    }
                 }
+
             }
+        } catch(Exception ie){
 
         }
 
     }
 
-    public ArrayList<STCard> dealCards(int i)
-    {
-        return null;
+//testing the deck
+public void testDeck(){
+    for(int i=0; i<60; i++){
+
+        System.out.println(cards[i][0]+" "+cards[i][1]+" ");
+
     }
+}
 }

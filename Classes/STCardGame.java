@@ -36,8 +36,11 @@ public class STCardGame {
         players = new STPlayer[numPlayers];
 
         for (STPlayer player : players){
-            ArrayList<STCard> card = deck.dealCards(NUM_CARDS_TO_DEAL);
-            player.getsCards();
+
+            for(int i=0;  i<9; i++){
+                player.getsCard(deck);
+            }
+
         }
     }
 }

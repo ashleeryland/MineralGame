@@ -12,6 +12,8 @@ public class MainGame
     private static final int END_GAME = 2;
 
     public static void main(String[] args) {
+        STDeck deck = new STDeck();
+        deck.testDeck();
         showWelcome();
         showMenu();
         int choice = userMenuChoice();
