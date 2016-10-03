@@ -6,21 +6,22 @@ import java.util.ArrayList;
 public class STPlayer
 {
 
-    private ArrayList<Integer> hand;
+    public static ArrayList<Integer> hand = new ArrayList<Integer>();
 
     public void getsCard( STDeck deck) {
 
-        boolean cardFound = false;
+        boolean cardFound = true;
 
-        while(!cardFound){
+        while(cardFound){
 
-             int testCard = (int) Math.random()*61;
+             int testCard = (int) (Math.random()*61);
+
 
             if(deck.cards[testCard][11] == "false"){
 
                 hand.add(testCard);
                 deck.cards[testCard][11] = "true";
-                cardFound = true;
+                cardFound = false;
 
             }
 
@@ -28,7 +29,12 @@ public class STPlayer
 
     }
 
-    public void showHand(){
-        
+    public static void showHand(){
+
+        for(int i = 0; i<hand.size(); i++){
+
+            System.out.println(hand.get(i));
+
+        }
     }
 }

@@ -14,7 +14,7 @@ public class MainGame
     private static final int END_GAME = 2;
 
     private static int numPlayers;
-    private static ArrayList<STPlayer> players;
+    private static ArrayList<STPlayer> players = new ArrayList<STPlayer>();
     private static int dealerID;
 
     public static void main(String[] args) {
@@ -26,6 +26,8 @@ public class MainGame
         if (choice == NEW_GAME) {
 
             startNewGame(deck);
+
+            showHand(1,players);
 
         }
 
@@ -67,6 +69,14 @@ public class MainGame
             players.add(newPlayer);
         }
         dealerID = selectDealer(numPlayers);
+
+    }
+
+    public static void showHand(int player, ArrayList<STPlayer> players){
+
+       STPlayer playerInQuestion = players.get(player);
+
+        playerInQuestion.showHand();
 
     }
 
