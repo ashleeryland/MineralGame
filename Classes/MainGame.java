@@ -31,7 +31,7 @@ public class MainGame
 
             numPlayers = startNewGame(deck);
 
-            showHand(0,players);
+            showHand(0,players,1);
 
         }
 
@@ -49,15 +49,61 @@ public class MainGame
             playersTurn =0;
         }
         keyElement = 6;
+        int passCounter = 0;
 
         while(!gameOver){
 
-            //
+            boolean didPickUp = false;
+
             if(playersTurn!=0) {
 
-                players.get(playersTurn).takeTurn(keyElement, pile, deck);
+               didPickUp =  players.get(playersTurn).takeTurn(keyElement, pile, deck);
+                if(didPickUp == true){
+                    passCounter+=1;
+                    System.out.println("Player has passed, pass counter is now "+passCounter);
+                }else{
+                    passCounter = 0;
+                }
             }else{
                 System.out.println("Your Turn");
+                showHand(0,players,1);
+
+                boolean turnOver = true;
+
+                while(turnOver){
+
+
+
+                    Scanner input = new Scanner(System.in);
+                    System.out.print("Enter card or P to pass: ");
+                    String cardPicked = input.nextLine();
+
+
+
+                    if(cardPicked.equals("P")){
+                        System.out.println(cardPicked);
+                        players.get(0).getsCard(deck);
+                        System.out.println("You passed");
+                        passCounter+=1;
+                        turnOver=false;
+                    }else{
+                        if(Double.parseDouble(deck.cards[players.get(0).hand.get(Integer.parseInt(cardPicked))][keyElement])>Double.parseDouble(deck.cards[pile.get(pile.size()-1)][keyElement])){
+                            System.out.println("You played card " + players.get(0).hand.get(Integer.parseInt(cardPicked)));
+                            players.get(0).hand.remove(Integer.parseInt(cardPicked));
+                            passCounter = 0;
+                            pile.add(players.get(0).hand.get(Integer.parseInt(cardPicked)));
+                            turnOver=false;
+                        }else{
+                            System.out.println("computer says no");
+                        }
+                    }
+                }
+            }
+
+            if(passCounter>numPlayers-1){
+                System.out.println("All players have passed, pile returned to deck and reset");
+                deck.returnToDeck(pile);
+                pile.clear();
             }
 
             if(players.get(playersTurn).getHandSize()==0){
@@ -104,11 +150,11 @@ public class MainGame
 
     }
 
-    public static void showHand(int player, ArrayList<STPlayer> players){
+    public static void showHand(int player, ArrayList<STPlayer> players,  int keyElement){
 
        STPlayer playerInQuestion = players.get(player);
 
-        playerInQuestion.showHand();
+        playerInQuestion.showHand(keyElement);
 
     }
 

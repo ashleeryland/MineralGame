@@ -42,7 +42,11 @@ public class STDeck {
         }
 
     }
-
+public void returnToDeck(ArrayList<Integer> pile){
+    for(int i=0; i<pile.size()-1; i++){
+        cards[pile.get(i)][11]="false";
+    }
+}
 //testing the deck
 public void testDeck(){
     for(int i=0; i<60; i++){

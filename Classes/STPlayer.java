@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public  class STPlayer
 {
 
-    private ArrayList<Integer> hand = new ArrayList<Integer>();
+    public ArrayList<Integer> hand = new ArrayList<Integer>();
 
     public void getsCard( STDeck deck) {
 
@@ -29,7 +29,7 @@ public  class STPlayer
 
     }
 
-    public void takeTurn(int keyElement, ArrayList<Integer> pile, STDeck deck){
+    public boolean takeTurn(int keyElement, ArrayList<Integer> pile, STDeck deck){
 
         int currentLeadingCard = 0;
         int leadingCardPosition = 0;
@@ -40,7 +40,7 @@ public  class STPlayer
             leadingCardVariable = 100;
 
             for( int i=0; i<hand.size(); i++){
-                if(deck.cards[hand.get(i)][1]!="TRUMP") {
+                if(hand.get(i)<54) {
                     if (Double.parseDouble(deck.cards[hand.get(i)][keyElement]) < leadingCardVariable) {
                         currentLeadingCard = hand.get(i);
                         leadingCardPosition = i;
@@ -53,6 +53,7 @@ public  class STPlayer
             pile.add(currentLeadingCard);
             hand.remove(leadingCardPosition);
             System.out.println("Player has played card "+currentLeadingCard+" the new amount to beat is "+leadingCardVariable);
+            return false;
 
         }else {
 //find possible cards to play
@@ -61,7 +62,7 @@ public  class STPlayer
 
 
             for (int i = 0; i < hand.size(); i++) {
-                if(deck.cards[hand.get(i)][1]!="TRUMP"){
+                if(hand.get(i)<54){
                     if(Double.parseDouble(deck.cards[hand.get(i)][keyElement]) > Double.parseDouble(deck.cards[pile.get(pile.size()-1)][keyElement])){
                         ShortList.add(i);
                     }
@@ -85,6 +86,7 @@ public  class STPlayer
                 pile.add(currentLeadingCard);
                 hand.remove(leadingCardPosition);
                 System.out.println("Player played card "+currentLeadingCard+" score to beat is" + leadingCardVariable);
+                return false;
 
             }else{
                 //find if we have a trump card to play
@@ -92,9 +94,12 @@ public  class STPlayer
                     pile.add(TrumpList.get(0));
                     hand.remove(TrumpList.get(0));
                     System.out.println("Played a Trump");
+                    return false;
                 }else{
                     getsCard(deck);
-                    
+                    System.out.println("Picked up a card");
+                    return true;
+
                 }
 
 
@@ -103,7 +108,7 @@ public  class STPlayer
         }
     }
 
-    public  void showHand(){
+    public  void showHand(int keyElement){
 
         for(int i = 0; i<hand.size(); i++){
 
