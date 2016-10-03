@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 
 /**
@@ -5,17 +9,32 @@ import java.util.ArrayList;
  */
 public class STDeck {
     private static final int NUM_CARDS_INIT = 60;
-    private ArrayList<STCard> cards;
+    private String[][] cards;
 
 
     //todo; List of all cards
 
     public STDeck(){
-        cards = new ArrayList<STCard>();
+        FileReader deckDoc = null;
+            try {
+                deckDoc = new FileReader(new File("res/STCards.txt"));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        BufferedReader reader = new BufferedReader(deckDoc);
+        String line = new String();
 
         for (int i = 0; i < NUM_CARDS_INIT; i++) {
-            cards.add(new STCard());
-            //TODO: google how to create random array of integers
+            line = reader.readLine();
+            String[] currentLine = line.split(",");
+            for (int j = 0; j < 12; j++){
+                if (j < 11){
+                    cards[i][j] = currentLine[j];
+                }else{
+                    cards[i][11]="false";
+                }
+            }
+
         }
 
     }
