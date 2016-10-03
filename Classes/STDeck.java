@@ -12,7 +12,7 @@ public class STDeck {
     public String[][] cards = new String[60][12];
 
 
-    //todo; List of all cards
+    //this reads the file of the card information and puts into the deck
 
     public STDeck(){
         FileReader deckDoc = null;
@@ -47,12 +47,5 @@ public void returnToDeck(ArrayList<Integer> pile){
         cards[pile.get(i)][11]="false";
     }
 }
-//testing the deck
-public void testDeck(){
-    for(int i=0; i<60; i++){
 
-        System.out.println(cards[i][0]+" "+cards[i][1]+" ");
-
-    }
-}
 }
