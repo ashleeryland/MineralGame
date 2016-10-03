@@ -3,10 +3,10 @@ import java.util.ArrayList;
 /**
  * Created by Ashlee Ryland on 12/09/2016.
  */
-public class STPlayer
+public  class STPlayer
 {
 
-    public static ArrayList<Integer> hand = new ArrayList<Integer>();
+    private ArrayList<Integer> hand = new ArrayList<Integer>();
 
     public void getsCard( STDeck deck) {
 
@@ -14,7 +14,7 @@ public class STPlayer
 
         while(cardFound){
 
-             int testCard = (int) (Math.random()*61);
+             int testCard = (int) (Math.random()*60);
 
 
             if(deck.cards[testCard][11] == "false"){
@@ -29,12 +29,16 @@ public class STPlayer
 
     }
 
-    public static void showHand(){
+    public  void showHand(){
 
         for(int i = 0; i<hand.size(); i++){
 
             System.out.println(hand.get(i));
 
         }
+    }
+
+    public  int getHandSize(){
+        return hand.size();
     }
 }

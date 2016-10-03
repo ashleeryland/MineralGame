@@ -17,6 +17,9 @@ public class MainGame
     private static ArrayList<STPlayer> players = new ArrayList<STPlayer>();
     private static int dealerID;
 
+    private static ArrayList<Integer> pile;
+    private static int playersTurn;
+
     public static void main(String[] args) {
         STDeck deck = new STDeck();
 
@@ -27,7 +30,7 @@ public class MainGame
 
             startNewGame(deck);
 
-            showHand(1,players);
+            showHand(0,players);
 
         }
 
@@ -57,17 +60,17 @@ public class MainGame
     //method to start a new game
     private static void startNewGame(STDeck deck)
     {
-
+        STPlayer newPlayer;
         int numPlayers = getNumPlayers();
         for(int i=0; i < numPlayers; i++){
-            STPlayer newPlayer = new STPlayer();
-
-            for(int j = 0; j<8; j++){
-                newPlayer.getsCard(deck);
-            }
-
+            newPlayer = new STPlayer();
             players.add(newPlayer);
+
+            for (int j = 0; j < 8; j++) {
+                players.get(i).getsCard(deck);
+            }
         }
+
         dealerID = selectDealer(numPlayers);
 
     }
