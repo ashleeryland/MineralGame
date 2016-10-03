@@ -7,11 +7,12 @@ public  class STPlayer
 {
 
     public ArrayList<Integer> hand = new ArrayList<Integer>();
+    public static final int TRUMP_CARD_STARTS_FROM = 54;
 
+    //this is to test whether the card has been used yet
     public void getsCard(STDeck deck) {
 
         boolean cardFound = true;
-
         while(cardFound){
 
             int testCard = (int) (Math.random()*60);
@@ -55,8 +56,7 @@ public  class STPlayer
             pile.add(currentLeadingCard);
             hand.remove(leadingCardPosition);
             String categoryName = categoryNames(keyCategory);
-//TODO:
-            System.out.println("Pile:" + pile);
+
             System.out.println("Player " + playersTurn + " has started this round playing card "+ currentLeadingCard + " " +
                     deck.cards[currentLeadingCard][0] + " the category is " + categoryName
                     + " amount to beat is " + leadingCardVariable);
@@ -64,13 +64,13 @@ public  class STPlayer
 
         }
         else {
-            //finding possible cards to play
+            //finding possible cards for the computer to play
             ArrayList<Integer>ShortList = new ArrayList<Integer>();
             ArrayList<Integer>TrumpList = new ArrayList<Integer>();
 
 
             for (int i = 0; i < hand.size(); i++) {
-                if(hand.get(i)<54){
+                if(hand.get(i) < TRUMP_CARD_STARTS_FROM){
                     Double playerCard = Double.parseDouble(deck.cards[hand.get(i)][keyCategory]);
                     Double lastPlayedCard = Double.parseDouble(deck.cards[pile.get(pile.size()-1)][keyCategory]);
                     if(playerCard > lastPlayedCard){
@@ -81,7 +81,8 @@ public  class STPlayer
                     TrumpList.add(i);
                 }
             }
-    //if can play card, find smallest card to play
+
+        //if can play card, find smallest card to play
             if(ShortList.size() > 0){
 
                 for (int i=0; i < ShortList.size();i++){
@@ -97,21 +98,20 @@ public  class STPlayer
                 pile.add(currentLeadingCard);
                 hand.remove(leadingCardPosition);
                 String categoryName = categoryNames(keyCategory);
-                //TODO:
-                System.out.println("Pile:" + pile);
                 System.out.println("Player " + playersTurn + " played a "+ currentLeadingCard + " " +
                         deck.cards[currentLeadingCard][0] + " the category is " + categoryName
                         + " amount to beat is " + leadingCardVariable);
                 return false;
 
             }else{
-                //find if we have a trump card to play
+
+                //find if we have a trump card to play play
+                //was unable to create how to use trump cards
                 if(TrumpList.size()>0){
-                    pile.add(TrumpList.get(0));
+                    int trumpCard = TrumpList.get(0);
+                    pile.add(trumpCard);
                     hand.remove(TrumpList.get(0));
-                    System.out.println("Played a Trump");
-                    //TODO:
-                    System.out.println("Pile:" + pile);
+                    System.out.println("Player " + playersTurn + " played a Trump. " + trumpCard + " This means " + deck.cards[trumpCard][3]);
                     return false;
                 }
                 else{
