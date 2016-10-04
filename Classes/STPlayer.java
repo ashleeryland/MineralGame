@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -10,15 +11,14 @@ public  class STPlayer
     public ArrayList<Integer> hand = new ArrayList<Integer>();
     public static final int TRUMP_CARD_STARTS_FROM = 54;
 
-    //this is to test whether the card has been used yet
+    //this while see if card has been used yet. It it ha snot be used it will be placed in players hand
     public void getsCard(STDeck deck) {
 
         boolean cardFound = true;
         while(cardFound){
 
             int testCard = (int) (Math.random()*60);
-
-            if(deck.cards[testCard][11] == "false"){
+            if(Objects.equals(deck.cards[testCard][11], "false")){
 
                 hand.add(testCard);
                 deck.cards[testCard][11] = "true";
@@ -81,7 +81,7 @@ public  class STPlayer
                 }
             }
 
-        //if can play card, find smallest card to play
+//      if can play card, find smallest card to play first that is greater that previous card
             if(ShortList.size() > 0){
 
                 for (int i=0; i < ShortList.size();i++){
@@ -104,8 +104,7 @@ public  class STPlayer
 
             }else{
 
-//                find if we have a trump card to play play
-//                was unable to create how to use trump cards
+//      find if we have a trump card to play if we do not have a mineral card
                 if(TrumpList.size()>0){
                     int trumpCard = TrumpList.get(0);
                     pile.add(trumpCard);
@@ -113,14 +112,18 @@ public  class STPlayer
                     System.out.println("Player " + playersTurn + " played a Trump. " + trumpCard + " This means " + deck.cards[trumpCard][3]);
                     return false;
                 }
+
+//       players will pick up a card and pass if they have no other cards to play
                 else{
                     getsCard(deck);
-                    System.out.println("Player " + playersTurn + "picked up a card");
+                    System.out.println("Player " + playersTurn + " picked up a card");
                     return true;
                 }
             }
         }
     }
+
+
 
 
 

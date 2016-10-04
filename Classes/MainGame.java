@@ -44,16 +44,16 @@ public class MainGame
 
 
         pile = new ArrayList<Integer>();
-        playersTurn = USER_PLAYER_NUM;
+        playersTurn = 0;//dealerID + 1;
         if (playersTurn > numPlayers + -1) {
             playersTurn = USER_PLAYER_NUM;
-
         }
 
 
+        int keyCategory = 6;
+        int passCounter = 0;
+
         while (!gameOver) {
-            int keyCategory = 6;
-            int passCounter = 0;
 
             boolean didPickUp = false;
 
@@ -61,89 +61,95 @@ public class MainGame
                 didPickUp = players.get(playersTurn).takeTurn(keyCategory, pile, deck, playersTurn);
                 if (didPickUp == true) {
                     passCounter += 1;
-                    System.out.println("Player has passed, pass counter is now " + passCounter);
                 } else {
                     passCounter = 0;
                 }
+
             } else {
-                System.out.println("Your Turn");
+                //users turn to play
+                System.out.println(USERS_NAME + " its your turn!");
                 showHand(0, players, 1, deck);
 
                 boolean turnOver = true;
 
+                //if there are no cards on the pile user selects card and category
+                if (pile.size() == 0) {
+                    Scanner selectCard = new Scanner(System.in);
+                    System.out.print("Enter card: ");
+                    int userCardPlayed = selectCard.nextInt();
+
+                    Scanner userCatInput = new Scanner(System.in);
+                    System.out.print("Pick a Category:");
+                    System.out.print("  6 = HARDNESS");
+                    System.out.print("  7 = SPECIFIC GRAVITY");
+                    System.out.print("  8 = CLEAVAGE");
+                    System.out.print("  9 = CRUSTAL ABUNDANCE");
+                    System.out.print("  10 = ECONOMIC VALUE");
+                    keyCategory = userCatInput.nextInt();
+
+                    int usersCard = players.get(0).hand.remove(userCardPlayed);
+                    System.out.println("You played card " + usersCard + " with the category " + keyCategory);
+
+                    pile.add(usersCard);
+                    passCounter = 0;
+                    turnOver = false;
+                }
+
                 while (turnOver) {
 
-                    Scanner input = new Scanner(System.in);
-                    System.out.print("Enter card or P to pick up a card: ");
-                    String userCardInput = input.nextLine();
-                    int usersCardPlayed = Integer.parseInt(userCardInput);
+                        Scanner input = new Scanner(System.in);
+                        System.out.print("Enter card or p to pick up a card: ");
+                        String userCardInput = input.nextLine();
 
-                    if (pile.size() == 0) {
-                        Scanner userCatInput = new Scanner(System.in);
-                        System.out.print("Pick a Catergory. 6 7 8 9 10");
-                        int keyCatergory = userCatInput.nextInt();
+                        if (userCardInput.equals("p")) {
+                            players.get(0).getsCard(deck);
+                            System.out.println("You picked up a card");
+                            passCounter += 1;
+                            turnOver = false;
+                        }
 
-
-                        int usersCard = players.get(0).hand.remove(usersCardPlayed);
-                        System.out.println("You played card " + usersCard + " with the catergory " + keyCatergory);
-
-                        pile.add(usersCard);
-                        passCounter = 0;
-                        turnOver = false;
-                    }
-
-                    else {
-                        Double usersCardCategory = Double.parseDouble(deck.cards[players.get(0).hand.get(usersCardPlayed)][keyCategory]);
-                        Double pileCategory = Double.parseDouble(deck.cards[pile.get(pile.size() - 1)][keyCategory]);
+                        else {
+                            //checking to see if users card is higher than the last card played
+                            int userCardPlayed = Integer.parseInt(userCardInput);
+                            Double usersCardCategory = Double.parseDouble(deck.cards[players.get(0).hand.get(userCardPlayed)][keyCategory]);
+                            Double pileCategory = Double.parseDouble(deck.cards[pile.get(pile.size() - 1)][keyCategory]);
 
                             if (usersCardCategory > pileCategory) {
-                                int usersCard = players.get(0).hand.remove(usersCardPlayed);
+                                int usersCard = players.get(0).hand.remove(userCardPlayed);
 
                                 System.out.println("You played card " + usersCard);
 
                                 passCounter = 0;
                                 pile.add(usersCard);
                                 turnOver = false;
-                            } else {
+                            }
 
-                                if (userCardInput.equals("P")) {
-                                    players.get(0).getsCard(deck);
-                                    System.out.println("You picked up a card");
-                                    passCounter += 1;
-                                    turnOver = false;
-                                }else{
-                                    System.out.println("Incorrect Choice");
-                                }
+                            else {
+                                System.out.println("Incorrect Choice");
                             }
                         }
                     }
                 }
 
+                //if all players pass new round starts and new kategory
                 if (passCounter > numPlayers - 1) {
                     System.out.println("All players have passed, new round!");
                     deck.returnToDeck(pile);
-                    keyCategory += 1;
                     pile.clear();
+                    keyCategory = +1;
                 }
 
+
                 playersTurn += 1;
-
                 if (playersTurn > numPlayers - 1) {
-
-                    playersTurn = 0;
+                    playersTurn = USER_PLAYER_NUM;
                 }
             }
         }
+//    }
 
-    private static String getUserName() {
-        String name;
-        Scanner input = new Scanner(System.in);
-        System.out.print("Enter name: ");
-        name = input.nextLine();
-        return name;
-    }
-
-    //method to start a new game
+//    this calls to get number of players and then adds them into array.
+//    also calls select dealer and set dealerID
     private static int addPlayers(STDeck deck)
     {
         STPlayer newPlayer;
@@ -156,37 +162,31 @@ public class MainGame
                 players.get(i).getsCard(deck);
             }
         }
-
         dealerID = selectDealer(numPlayers);
         return numPlayers;
-
     }
 
-
-    public static void showHand(int player, ArrayList<STPlayer> players,  int keyElement, STDeck deck){
-
+    private static void showHand(int player, ArrayList<STPlayer> players, int keyElement, STDeck deck){
         STPlayer playerInQuestion = players.get(player);
-
         playerInQuestion.showHand(deck);
-
     }
 
-
-    public static int selectDealer(int numPlayers)
+//  dealer is chosen at random and show to user
+    private static int selectDealer(int numPlayers)
     {
         Random rand = new Random();
-        int randomNum = rand.nextInt(numPlayers) + 1;
-        dealerID = randomNum;
+        dealerID = rand.nextInt(numPlayers) + 1;
 
-        if (dealerID == 0)
+        if (dealerID == 0) {
             System.out.println("You are the dealer");
-        else
+        }
+        else {
             System.out.println("Dealer is player " + dealerID);
-
+        }
         return dealerID;
     }
 
-    //user selects amount of players. Must be between 3 and 6
+//    user selects amount of players. Must be between 3 and 6
     private static int getNumPlayers()
     {
         int numPlayers;
@@ -201,7 +201,7 @@ public class MainGame
         return numPlayers;
     }
 
-    //users menu choice. Currently can only select 1 or 2 to start of exit game
+//    users menu choice. Currently can only select 1 or 2 to start of exit game
     private static int userMenuChoice()
     {
         int menuChoice;
@@ -213,7 +213,16 @@ public class MainGame
             menuChoice = input.nextInt();
         }
         return menuChoice;
+    }
 
+//following three methods get username, show a welcome, and shows the game menu. All at the start of the game.
+
+    private static String getUserName() {
+        String name;
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter name: ");
+        name = input.nextLine();
+        return name;
     }
 
 
