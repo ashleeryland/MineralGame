@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Created by Ashlee Ryland on 12/09/2016.
@@ -23,9 +24,7 @@ public  class STPlayer
                 deck.cards[testCard][11] = "true";
                 cardFound = false;
             }
-
         }
-
     }
 
     //this is for the computers turn. It will show what cards that have been played.
@@ -34,6 +33,7 @@ public  class STPlayer
         int currentLeadingCard = 0;
         int leadingCardPosition = 0;
         double leadingCardVariable = 0;
+
 
         //checking too see what card to play first
         if(pile.size() == 0){
@@ -48,7 +48,6 @@ public  class STPlayer
                         currentLeadingCard = hand.get(i);
                         leadingCardPosition = i;
                         leadingCardVariable = playerCardCategory;
-
                     }
                 }
             }
@@ -61,8 +60,8 @@ public  class STPlayer
                     deck.cards[currentLeadingCard][0] + " the category is " + categoryName
                     + " amount to beat is " + leadingCardVariable);
             return false;
-
         }
+
         else {
             //finding possible cards for the computer to play
             ArrayList<Integer>ShortList = new ArrayList<Integer>();
@@ -105,8 +104,8 @@ public  class STPlayer
 
             }else{
 
-                //find if we have a trump card to play play
-                //was unable to create how to use trump cards
+//                find if we have a trump card to play play
+//                was unable to create how to use trump cards
                 if(TrumpList.size()>0){
                     int trumpCard = TrumpList.get(0);
                     pile.add(trumpCard);
@@ -116,12 +115,14 @@ public  class STPlayer
                 }
                 else{
                     getsCard(deck);
-                    System.out.println("Picked up a card");
+                    System.out.println("Player " + playersTurn + "picked up a card");
                     return true;
                 }
             }
         }
     }
+
+
 
     public void showHand(STDeck deck){
 

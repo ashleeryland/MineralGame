@@ -42,6 +42,7 @@ public class STDeck {
         }
 
     }
+
 public void returnToDeck(ArrayList<Integer> pile){
     for(int i=0; i<pile.size()-1; i++){
         cards[pile.get(i)][11]="false";
