@@ -11,6 +11,7 @@ public class MainGame
     private static final int NEW_GAME = 1;
     private static final String USERS_NAME = getUserName();
     private static final int END_GAME = 2;
+    private static final int NUM_CARD_HAND_INIT = 8 ;
 
     private static int numPlayers;
     private static ArrayList<STPlayer> players = new ArrayList<STPlayer>();
@@ -37,14 +38,10 @@ public class MainGame
         }
 
         boolean gameOver = false;
-        if (players.get(playersTurn).getHandSize() == 0) {
-            gameOver = true;
-            System.out.println("Game Over");
-        }
 
 
         pile = new ArrayList<Integer>();
-        playersTurn = 0;//dealerID + 1;
+        playersTurn = dealerID + 1;
         if (playersTurn > numPlayers + -1) {
             playersTurn = USER_PLAYER_NUM;
         }
@@ -54,6 +51,7 @@ public class MainGame
         int passCounter = 0;
 
         while (!gameOver) {
+
 
             boolean didPickUp = false;
 
@@ -69,6 +67,7 @@ public class MainGame
                 //users turn to play
                 System.out.println(USERS_NAME + " its your turn!");
                 showHand(0, players, 1, deck);
+
 
                 boolean turnOver = true;
 
@@ -101,6 +100,7 @@ public class MainGame
                         System.out.print("Enter card or p to pick up a card: ");
                         String userCardInput = input.nextLine();
 
+                        //if the user is picking up a card
                         if (userCardInput.equals("p")) {
                             players.get(0).getsCard(deck);
                             System.out.println("You picked up a card");
@@ -131,11 +131,12 @@ public class MainGame
                     }
                 }
 
-                //if all players pass new round starts and new kategory
-                if (passCounter > numPlayers - 1) {
+                //if all players pass new round starts and new category
+                if (passCounter > numPlayers - 2) {
                     System.out.println("All players have passed, new round!");
                     deck.returnToDeck(pile);
                     pile.clear();
+                    passCounter = 0;
                     keyCategory = +1;
                 }
 
@@ -144,9 +145,21 @@ public class MainGame
                 if (playersTurn > numPlayers - 1) {
                     playersTurn = USER_PLAYER_NUM;
                 }
+
+                if (players.get(playersTurn).getHandSize() == 0) {
+                    gameOver = true;
+                    if (playersTurn == 0) {
+                        System.out.println("Game Over!" + " Congratulations " + USERS_NAME + " you won!" );
+                    }
+                    else {
+                        System.out.println("Game Over!" + " Winner is player " + playersTurn);
+                    }
+                    System.exit(0);
             }
+
         }
-//    }
+    }
+
 
 //    this calls to get number of players and then adds them into array.
 //    also calls select dealer and set dealerID
@@ -158,7 +171,7 @@ public class MainGame
             newPlayer = new STPlayer();
             players.add(newPlayer);
 
-            for (int j = 0; j < 8; j++) {
+            for (int j = 0; j < NUM_CARD_HAND_INIT; j++) {
                 players.get(i).getsCard(deck);
             }
         }

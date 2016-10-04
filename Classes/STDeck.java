@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class STDeck {
     private static final int NUM_CARDS_INIT = 60;
-    public String[][] cards = new String[60][12];
+    public String[][] cards = new String[NUM_CARDS_INIT][12];
 
 
     //this reads the file of the card information and puts into the deck

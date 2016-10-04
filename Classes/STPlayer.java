@@ -41,9 +41,8 @@ public  class STPlayer
             leadingCardVariable = 100;
 
             for( int i = 0; i < hand.size(); i++){
-                if(hand.get(i)<54) {
+                if(hand.get(i)<TRUMP_CARD_STARTS_FROM) {
                     Double playerCardCategory = Double.parseDouble(deck.cards[hand.get(i)][keyCategory]);
-
                     if (playerCardCategory < leadingCardVariable) {
                         currentLeadingCard = hand.get(i);
                         leadingCardPosition = i;
@@ -105,6 +104,8 @@ public  class STPlayer
             }else{
 
 //      find if we have a trump card to play if we do not have a mineral card
+//      Unable to figure out how to play trump cards
+
                 if(TrumpList.size()>0){
                     int trumpCard = TrumpList.get(0);
                     pile.add(trumpCard);
