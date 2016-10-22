@@ -47,32 +47,32 @@ public class Game {
     private void showMenu(){
 
         headerLabel.setText("Welcome " + USERS_NAME + " to the Mineral Trump Card Game!");
-        JButton okButton = new JButton("START");
-        JButton javaButton = new JButton("QUIT");
-        JButton cancelButton = new JButton("HELP");
-        cancelButton.setHorizontalTextPosition(SwingConstants.LEFT);
+        JButton startButton = new JButton("START");
+        JButton quitButton = new JButton("QUIT");
+        JButton helpButton = new JButton("HELP");
+        helpButton.setHorizontalTextPosition(SwingConstants.LEFT);
 
-        okButton.addActionListener(new ActionListener() {
+        startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 statusLabel.setText("Yep, we are starting");
             }
         });
 
-        javaButton.addActionListener(new ActionListener() {
+        quitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 statusLabel.setText("Ok Bye");
             }
         });
 
-        cancelButton.addActionListener(new ActionListener() {
+        helpButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 statusLabel.setText("Yep here are the rules");
             }
         });
 
-        controlPanel.add(okButton);
-        controlPanel.add(javaButton);
-        controlPanel.add(cancelButton);
+        controlPanel.add(startButton);
+        controlPanel.add(quitButton);
+        controlPanel.add(helpButton);
 
         mainFrame.setVisible(true);
     }
