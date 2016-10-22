@@ -57,13 +57,13 @@ public class Game {
                 startButton.setVisible(false);
                 quitButton.setVisible(false);
                 helpButton.setVisible(false);
-                showPlayerChoice();
+                getNumPlayers();
             }
         });
 
         quitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                statusLabel.setText("Ok Bye");
+                System.exit(0);
             }
         });
 
@@ -80,7 +80,7 @@ public class Game {
         mainFrame.setVisible(true);
     }
 
-    private void showPlayerChoice(){
+    private void getNumPlayers(){
 
         headerLabel.setText("Pick number of players!");
         final Choice playersChoice = new Choice();
