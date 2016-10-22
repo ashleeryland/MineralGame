@@ -54,7 +54,10 @@ public class Game {
 
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                statusLabel.setText("Yep, we are starting");
+                startButton.setVisible(false);
+                quitButton.setVisible(false);
+                helpButton.setVisible(false);
+                showPlayerChoice();
             }
         });
 
@@ -76,6 +79,33 @@ public class Game {
 
         mainFrame.setVisible(true);
     }
+
+    private void showPlayerChoice(){
+
+        headerLabel.setText("Pick number of players!");
+        final Choice playersChoice = new Choice();
+
+        playersChoice.add("3");
+        playersChoice.add("4");
+        playersChoice.add("5");
+        playersChoice.add("6");
+
+        Button selectButton = new Button("Select");
+
+        selectButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String data = "Number of Players selected: "
+                        + playersChoice.getItem(playersChoice.getSelectedIndex());
+                statusLabel.setText(data);
+            }
+        });
+
+        controlPanel.add(playersChoice);
+        controlPanel.add(selectButton);
+
+        mainFrame.setVisible(true);
+    }
+
 
     private static String getUserName() {
         String name = JOptionPane.showInputDialog("Enter name");
