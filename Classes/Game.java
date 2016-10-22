@@ -94,9 +94,8 @@ public class Game {
 
         selectButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String data = "Number of Players selected: "
-                        + playersChoice.getItem(playersChoice.getSelectedIndex());
-                statusLabel.setText(data);
+                Integer numPlayers = Integer.parseInt(playersChoice.getItem(playersChoice.getSelectedIndex()));
+                System.out.println(numPlayers);
             }
         });
 
