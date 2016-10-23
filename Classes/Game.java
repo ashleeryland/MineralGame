@@ -1,7 +1,6 @@
 /**
  * Created by rylan on 22/10/2016.
  */
-import jdk.nashorn.internal.scripts.JO;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -15,6 +14,12 @@ public class Game {
     private JLabel headerLabel;
     private JLabel statusLabel;
     private JPanel controlPanel;
+
+    JButton startButton = new JButton("START");
+    JButton quitButton = new JButton("QUIT");
+    JButton helpButton = new JButton("HELP");
+    JButton selectButton = new JButton("Select");
+    final Choice playersChoice = new Choice();
 
     private static final int NEW_GAME = 1;
     private static final int END_GAME = 2;
@@ -33,8 +38,10 @@ public class Game {
     }
 
     public static void main(String[] args){
+        STDeck deck = new STDeck();
         Game gameMenu = new Game();
         gameMenu.showMenu();
+
     }
 
     private void prepareGUI(){
@@ -63,9 +70,7 @@ public class Game {
     private void showMenu(){
 
         headerLabel.setText("Welcome " + USERS_NAME + " to the Mineral Trump Card Game!");
-        JButton startButton = new JButton("START");
-        JButton quitButton = new JButton("QUIT");
-        JButton helpButton = new JButton("HELP");
+
         helpButton.setHorizontalTextPosition(SwingConstants.LEFT);
 
         startButton.addActionListener(new ActionListener() {
@@ -96,17 +101,16 @@ public class Game {
         mainFrame.setVisible(true);
     }
 
-    private void getNumPlayers(){
 
+    private void getNumPlayers(){
         headerLabel.setText("Pick number of players!");
-        final Choice playersChoice = new Choice();
 
         playersChoice.add("3");
         playersChoice.add("4");
         playersChoice.add("5");
         playersChoice.add("6");
 
-        Button selectButton = new Button("Select");
+
         controlPanel.add(playersChoice);
         controlPanel.add(selectButton);
         mainFrame.setVisible(true);
@@ -114,31 +118,37 @@ public class Game {
         selectButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int numPlayers = Integer.parseInt(playersChoice.getItem(playersChoice.getSelectedIndex()));
-                addPlayers(numPlayers, null);
+                statusLabel.setText("You have picked " + numPlayers + " number of players!");
             }
         });
     }
 
+//    private static int showNum(int numPlayers) {
+//        System.out.println("HELLO " + numPlayers);
+//        return numPlayers;
+//    }
 
-    private static void addPlayers(int numPlayers, STDeck deck)
+
+    private static int addPlayers(STDeck deck)
     {
-//        STPlayer newPlayer;
-//        for(int i=0; i < numPlayers; i++){
-//            newPlayer = new STPlayer();
-//            players.add(newPlayer);
-//
-//            for (int j = 0; j < NUM_CARD_HAND_INIT; j++) {
-//                players.get(i).getsCard(deck);
-//            }
-//        }
-        System.out.println("HELLOOOO" + numPlayers);
-        dealerID = selectDealer(numPlayers);
+        STPlayer newPlayer;
+        for(int i = 0; i < Game.numPlayers; i++){
+            newPlayer = new STPlayer();
+            players.add(newPlayer);
+
+            for (int j = 0; j < NUM_CARD_HAND_INIT; j++) {
+                players.get(i).getsCard(deck);
+            }
+        }
+        dealerID = selectDealer(Game.numPlayers);
+        System.out.println("HELLLLLO" + players);
+        return Game.numPlayers;
     }
 
     private static int selectDealer(int numPlayers)
     {
         Random rand = new Random();
-        dealerID = rand.nextInt(numPlayers) + 1;
+        dealerID = rand.nextInt(Game.numPlayers) + 1;
 
         if (dealerID == 1) {
             JOptionPane.showMessageDialog(null, "You are the dealer!");
@@ -147,6 +157,11 @@ public class Game {
             JOptionPane.showMessageDialog(null, "Dealer is player " + dealerID);
         }
         return dealerID;
+    }
+
+    private static void showHand(int player, ArrayList<STPlayer> players, int keyElement, STDeck deck){
+        STPlayer playerInQuestion = players.get(player);
+        playerInQuestion.showHand(deck);
     }
 
 
