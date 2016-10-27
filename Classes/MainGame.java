@@ -181,7 +181,7 @@ public class MainGame
 
     private static void showHand(int player, ArrayList<STPlayer> players, int keyElement, STDeck deck){
         STPlayer playerInQuestion = players.get(player);
-        playerInQuestion.showHand(deck);
+//        playerInQuestion.showHand(deck);
     }
 
 //  dealer is chosen at random and show to user

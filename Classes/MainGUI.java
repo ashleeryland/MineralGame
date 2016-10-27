@@ -13,6 +13,10 @@ public class MainGUI {
     private JLabel headerLabel;
     private JLabel statusLabel;
     private JPanel controlPanel;
+    private JLabel yourTurn;
+    public Game game;
+    public static STDeck deck = new STDeck();
+    public static STPlayer players;
 
     JButton startButton = new JButton("START");
     JButton quitButton = new JButton("QUIT");
@@ -21,24 +25,25 @@ public class MainGUI {
     final Choice playersChoice = new Choice();
 
 
-    public MainGUI(){
+    public MainGUI() {
         prepareGUI();
         showMenu();
-     }
+    }
 
-    private void prepareGUI(){
+    private void prepareGUI() {
         mainFrame = new JFrame("Mineral Game");
-        mainFrame.setSize(700,700);
+        mainFrame.setSize(700, 700);
         mainFrame.setLayout(new GridLayout(3, 1));
         mainFrame.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent windowEvent){
+            public void windowClosing(WindowEvent windowEvent) {
                 System.exit(0);
             }
         });
         headerLabel = new JLabel("", JLabel.CENTER);
-        statusLabel = new JLabel("",JLabel.CENTER);
+        statusLabel = new JLabel("", JLabel.CENTER);
 
-        statusLabel.setSize(350,100);
+
+        statusLabel.setSize(350, 100);
 
         controlPanel = new JPanel();
         controlPanel.setLayout(new FlowLayout());
@@ -49,9 +54,9 @@ public class MainGUI {
         mainFrame.setVisible(true);
     }
 
-    public void showMenu(){
+    public void showMenu() {
 
-        headerLabel.setText("Welcome " + Game.USERS_NAME +" to the Mineral Trump Card Game!");
+        headerLabel.setText("Welcome " + Game.USERS_NAME + " to the Mineral Trump Card Game!");
 
         helpButton.setHorizontalTextPosition(SwingConstants.LEFT);
 
@@ -61,7 +66,7 @@ public class MainGUI {
                 quitButton.setVisible(false);
                 helpButton.setVisible(false);
                 showNumMenu();
-                Game.startGame();
+                game.startGame();
             }
         });
 
@@ -86,7 +91,7 @@ public class MainGUI {
 
 
     private void showNumMenu() {
-        STDeck deck = new STDeck();
+
         headerLabel.setText("Pick number of players!");
 
         playersChoice.add("3");
@@ -102,12 +107,31 @@ public class MainGUI {
         selectButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int numPlayers = Integer.parseInt(playersChoice.getItem(playersChoice.getSelectedIndex()));
-                Game.getNumPlayers(numPlayers);
+                game.getNumPlayers(numPlayers);
+                viewHand(deck);
             }
         });
     }
 
+    public void viewHand(STDeck deck) {
+
+//        String[] butonNames = {};
+
+        yourTurn.setText("Here are your cards!");
 
 
+        for (int i = 0; i < 8; i++ ){//player.hand.size(); i++) {
+            JButton cardButtons = new JButton();
+            ImageIcon image = new ImageIcon("res\\Slide"+ deck.cards[players.hand.get(i) +1]);
+            cardButtons.setLayout(new FlowLayout(FlowLayout.CENTER));
+            cardButtons.setPreferredSize(new Dimension(200, 400));
+            ImageIcon images = new ImageIcon((image.getImage().getScaledInstance(200, 400, Image.SCALE_SMOOTH)));
+            cardButtons.setIcon(images);
+//            cardButtons.addActionListener();
+            controlPanel.add(cardButtons, FlowLayout.LEFT);
+        }
 
+    }
 }
+
+

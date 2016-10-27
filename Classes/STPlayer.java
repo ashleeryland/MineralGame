@@ -1,13 +1,20 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
+import static com.sun.java.accessibility.util.AWTEventMonitor.addActionListener;
+
 /**
  * Created by Ashlee Ryland on 12/09/2016.
  */
-public  class STPlayer
+public  class STPlayer extends JFrame implements ActionListener
 {
 
+    public static STDeck deck;
     public ArrayList<Integer> hand = new ArrayList<Integer>();
     public static final int TRUMP_CARD_STARTS_FROM = 54;
 
@@ -128,31 +135,47 @@ public  class STPlayer
 
 
 
-    public void showHand(STDeck deck){
+//    public void showHand(STDeck deck) {
+//        JLabel yourTurn = new JLabel("", JLabel.CENTER);
+//        final JButton[] cardButtons = new JButton[]{};
+//        String[] butonNames = {};
+//
+//        yourTurn.setText("Here are your cards!");
+//
+//
+//        for (int i = 0; i < hand.size(); i++) {
+//            cardButtons[i] = new JButton();
+//            butonNames[i] = "Card " + deck.cards[hand.get(i)];
+//        }
+////            if(hand.get(i)<54) {
+////                System.out.println("    Card " + i + " is a " + deck.cards[hand.get(i)][1] + " card.");
+////                System.out.println("        NAME: " + deck.cards[hand.get(i)][0]);
+////                System.out.println("        FORMULA: " + deck.cards[hand.get(i)][2]);
+////                System.out.println("        CLASSIFICATION: " + deck.cards[hand.get(i)][3]);
+////                System.out.println("        CRYSTAL SYSTEM: " + deck.cards[hand.get(i)][4]);
+////                System.out.println("        OCCURANCE: " + deck.cards[hand.get(i)][5]);
+////                System.out.println("        HARDNESS: " + deck.cards[hand.get(i)][6]);
+////                System.out.println("        SPECIFIC GRAVITY: " + deck.cards[hand.get(i)][7]);
+////                System.out.println("        CLEAVAGE: " + deck.cards[hand.get(i)][8]);
+////                System.out.println("        CRUSTAL ABUNDANCE: " + deck.cards[hand.get(i)][9]);
+////                System.out.println("        ECCONOMIC VALUE: " + deck.cards[hand.get(i)][10]);
+////                System.out.println(" **************************************** ");
+////            }
+////            else{
+////                System.out.println("    Card " + i + " is a " + deck.cards[hand.get(i)][1] + " card!");
+////                System.out.println("        You can: " + deck.cards[hand.get(i)][3]);
+////                System.out.println(" **************************************** ");
+////            }
+//
+//    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
-        System.out.println("Your hand of cards:");
-        for(int i = 0; i < hand.size(); i++){
-            if(hand.get(i)<54) {
-                System.out.println("    Card " + i + " is a " + deck.cards[hand.get(i)][1] + " card.");
-                System.out.println("        NAME: " + deck.cards[hand.get(i)][0]);
-                System.out.println("        FORMULA: " + deck.cards[hand.get(i)][2]);
-                System.out.println("        CLASSIFICATION: " + deck.cards[hand.get(i)][3]);
-                System.out.println("        CRYSTAL SYSTEM: " + deck.cards[hand.get(i)][4]);
-                System.out.println("        OCCURANCE: " + deck.cards[hand.get(i)][5]);
-                System.out.println("        HARDNESS: " + deck.cards[hand.get(i)][6]);
-                System.out.println("        SPECIFIC GRAVITY: " + deck.cards[hand.get(i)][7]);
-                System.out.println("        CLEAVAGE: " + deck.cards[hand.get(i)][8]);
-                System.out.println("        CRUSTAL ABUNDANCE: " + deck.cards[hand.get(i)][9]);
-                System.out.println("        ECCONOMIC VALUE: " + deck.cards[hand.get(i)][10]);
-                System.out.println(" **************************************** ");
-            }
-            else{
-                System.out.println("    Card " + i + " is a " + deck.cards[hand.get(i)][1] + " card!");
-                System.out.println("        You can: " + deck.cards[hand.get(i)][3]);
-                System.out.println(" **************************************** ");
-            }
-        }
     }
+
+
+
+
 
     public  int getHandSize(){
         return hand.size();
@@ -181,4 +204,6 @@ public  class STPlayer
         }
         return categoryName;
     }
+
+
 }
