@@ -59,7 +59,7 @@ public class GameGUI extends JFrame {
 
         for (int i = 0; i < 8; i++ ){//player.hand.size(); i++) {
             cardButtons[i] = new JButton();
-            ImageIcon image1 = new ImageIcon("C:\\Users\\rylan\\Desktop\\Uni Work\\2406 Ass\\res\\Slide" + deck.cards[hand.get(i) + 1] +".jpeg");
+            ImageIcon image1 = new ImageIcon("C:\\Users\\rylan\\Desktop\\Uni Work\\2406 Ass\\res\\Slide" + deck.cards[hand.get(i) + 1] +".jpg");
             cardButtons[i].setLayout(new FlowLayout(FlowLayout.CENTER));
             cardButtons[i].setPreferredSize(new Dimension(100, 200));
             ImageIcon images2 = new ImageIcon((image1.getImage().getScaledInstance(200, 400, Image.SCALE_SMOOTH)));
@@ -75,6 +75,8 @@ public class GameGUI extends JFrame {
 
 
     }
+
+
 
 
     public static void main(String[] args) {

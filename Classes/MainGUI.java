@@ -14,7 +14,13 @@ public class MainGUI {
     private JLabel headerLabel;
     private JLabel statusLabel;
     public JPanel controlPanel;
-    public JLabel yourTurn;
+    private JLabel ruleLabel1;
+    private JLabel ruleLabel2;
+    private JLabel ruleLabel3;
+    private ImageIcon rulesImage1;
+    private ImageIcon rulesImage2;
+    private ImageIcon rulesImage3;
+
     public Game game;
     public static STDeck deck = new STDeck();
     public ArrayList<Integer> hand = new ArrayList<Integer>();
@@ -25,6 +31,7 @@ public class MainGUI {
     JButton quitButton = new JButton("QUIT");
     JButton helpButton = new JButton("HELP");
     JButton selectButton = new JButton("Select");
+    JButton backButton = new JButton("Back");
     final Choice playersChoice = new Choice();
 
 
@@ -36,7 +43,7 @@ public class MainGUI {
 
     private void prepareGUI() {
         mainFrame = new JFrame("Mineral Game");
-        mainFrame.setSize(700, 700);
+        mainFrame.setSize(1000, 700);
         mainFrame.setLayout(new GridLayout(3, 1));
         mainFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
@@ -56,6 +63,7 @@ public class MainGUI {
         mainFrame.add(controlPanel);
         mainFrame.add(statusLabel);
         mainFrame.setVisible(true);
+
     }
 
     public void showMenu() {
@@ -69,7 +77,7 @@ public class MainGUI {
                 startButton.setVisible(false);
                 quitButton.setVisible(false);
                 helpButton.setVisible(false);
-                game.startGame();
+//                game.startGame();
                 showNumMenu();
             }
         });
@@ -82,9 +90,7 @@ public class MainGUI {
 
         helpButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                statusLabel.setText("The rules");
-                JLabel imgLabel = new JLabel(new ImageIcon("C:\\Users\\rylan\\Desktop\\Uni Work\\2406 Ass\\res\\Slide61.jpeg"));
-                controlPanel.add(imgLabel);
+                showRules();
 
             }
         });
@@ -115,10 +121,44 @@ public class MainGUI {
             public void actionPerformed(ActionEvent e) {
                 int numPlayers = Integer.parseInt(playersChoice.getItem(playersChoice.getSelectedIndex()));
                 game.getNumPlayers(numPlayers);
+                new GameGUI();
 
             }
         });
     }
+
+    public void showRules(){
+        headerLabel.setText("Rules");
+        mainFrame.setLayout(new FlowLayout());
+
+        startButton.setVisible(false);
+        quitButton.setVisible(false);
+        helpButton.setVisible(false);
+
+        rulesImage1 = new ImageIcon("res\\Rules1.JPG");
+        ruleLabel1 = new JLabel(rulesImage1);
+        controlPanel.add(ruleLabel1);
+
+        rulesImage2 = new ImageIcon("res\\rules2.JPG");
+        ruleLabel2 = new JLabel(rulesImage2);
+        controlPanel.add(ruleLabel2);
+
+        rulesImage3 = new ImageIcon("res\\rules3.JPG");
+        ruleLabel3 = new JLabel(rulesImage3);
+        controlPanel.add(ruleLabel3);
+
+        controlPanel.add(backButton);
+
+        backButton.setVerticalAlignment(SwingConstants.BOTTOM);
+
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showMenu();
+            }
+        });
+
+    }
+
 
 }
 
