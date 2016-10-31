@@ -33,8 +33,9 @@ public class Game extends JFrame{
     }
 
     public static void startGame(){
+        STDeck deck = new STDeck();
         addPlayers(deck);
-        showHand(0, players, 1, deck);
+
 
 //        boolean gameOver = false;
 //
@@ -195,14 +196,13 @@ public class Game extends JFrame{
         else {
             JOptionPane.showMessageDialog(null, "Dealer is player " + dealerID);
         }
-
         return dealerID;
     }
 
-    private static void showHand(int player, ArrayList<STPlayer> players, int keyElement, STDeck deck){
-        STPlayer playerInQuestion = players.get(player);
-
-    }
+//    private static void showHand(int player, ArrayList<STPlayer> players, int keyElement, STDeck deck){
+//        STPlayer playerInQuestion = players.get(player);
+//        MainGUI.showHand(deck);
+//    }
 
 
     private static String getUserName() {
