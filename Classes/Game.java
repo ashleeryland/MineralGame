@@ -8,13 +8,11 @@ import java.util.Random;
 import java.util.Scanner;
 import javax.swing.*;
 
-public class Game extends JFrame{
+public class Game extends JFrame {
     public static final String USERS_NAME = getUserName();
-    private static final int NUM_CARD_HAND_INIT = 8 ;
-    private static MainGame mainGUI;
+    private static final int NUM_CARD_HAND_INIT = 8;
     public Game game;
     public static STDeck deck = new STDeck();
-
 
 
     private static int numPlayers = 4;
@@ -26,20 +24,19 @@ public class Game extends JFrame{
     private static final int USER_PLAYER_NUM = 0;
 
 
-
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         MainGUI mainFrame = new MainGUI();
     }
 
-    public static void startGame(){
+    public static void startGame() {
         STDeck deck = new STDeck();
         addPlayers(deck);
 
 
-//        boolean gameOver = false;
-//
-//
+        boolean gameOver = false;
+
+
 //        pile = new ArrayList<Integer>();
 //        playersTurn = dealerID + 1;
 //        if (playersTurn > numPlayers + -1) {
@@ -106,9 +103,7 @@ public class Game extends JFrame{
 //                        System.out.println("You picked up a card");
 //                        passCounter += 1;
 //                        turnOver = false;
-//                    }
-//
-//                    else {
+//                    } else {
 //                        //checking to see if users card is higher than the last card played
 //                        int userCardPlayed = Integer.parseInt(userCardInput);
 //                        Double usersCardCategory = Double.parseDouble(deck.cards[players.get(0).hand.get(userCardPlayed)][keyCategory]);
@@ -122,9 +117,7 @@ public class Game extends JFrame{
 //                            passCounter = 0;
 //                            pile.add(usersCard);
 //                            turnOver = false;
-//                        }
-//
-//                        else {
+//                        } else {
 //                            System.out.println("Incorrect Choice");
 //                        }
 //                    }
@@ -149,27 +142,18 @@ public class Game extends JFrame{
 //            if (players.get(playersTurn).getHandSize() == 0) {
 //                gameOver = true;
 //                if (playersTurn == 0) {
-//                    System.out.println("Game Over!" + " Congratulations " + USERS_NAME + " you won!" );
-//                }
-//                else {
-//                    System.out.println("Game Over!" + " Winner is player " + playersTurn);
+//                    JOptionPane.showMessageDialog(null, "Game Over!" + " Congratulations " + USERS_NAME + " you won!");
+//                } else {
+//                    JOptionPane.showMessageDialog(null, "Game Over!" + " Winner is player " + playersTurn);
 //                }
 //                System.exit(0);
 //            }
 //
 //        }
+//
+//    }
 
     }
-
-
-
-
-
-
-
-
-
-
 
     public static void addPlayers(STDeck deck)
     {
@@ -182,7 +166,6 @@ public class Game extends JFrame{
                 players.get(i).getsCard(deck);
             }
         }
-        System.out.println("Add Players done");
     }
 
     private static int selectDealer(int numPlayers)
@@ -199,10 +182,9 @@ public class Game extends JFrame{
         return dealerID;
     }
 
-//    private static void showHand(int player, ArrayList<STPlayer> players, int keyElement, STDeck deck){
-//        STPlayer playerInQuestion = players.get(player);
-//        MainGUI.showHand(deck);
-//    }
+    private static void showHand(int player, ArrayList<STPlayer> players, int keyElement, STDeck deck){
+        STPlayer playerInQuestion = players.get(player);
+    }
 
 
     private static String getUserName() {

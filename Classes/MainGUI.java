@@ -7,16 +7,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 public class MainGUI {
     private JFrame mainFrame;
     private JLabel headerLabel;
     private JLabel statusLabel;
-    private JPanel controlPanel;
-    private JLabel yourTurn;
+    public JPanel controlPanel;
+    public JLabel yourTurn;
     public Game game;
     public static STDeck deck = new STDeck();
-    public static STPlayer players;
+    public ArrayList<Integer> hand = new ArrayList<Integer>();
+    private static ArrayList<STPlayer> players = new ArrayList<STPlayer>();
+
 
     JButton startButton = new JButton("START");
     JButton quitButton = new JButton("QUIT");
@@ -28,6 +31,7 @@ public class MainGUI {
     public MainGUI() {
         prepareGUI();
         showMenu();
+
     }
 
     private void prepareGUI() {
@@ -65,8 +69,8 @@ public class MainGUI {
                 startButton.setVisible(false);
                 quitButton.setVisible(false);
                 helpButton.setVisible(false);
-                showNumMenu();
                 game.startGame();
+                showNumMenu();
             }
         });
 
@@ -78,7 +82,10 @@ public class MainGUI {
 
         helpButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                statusLabel.setText("Yep here are the rules");
+                statusLabel.setText("The rules");
+                JLabel imgLabel = new JLabel(new ImageIcon("C:\\Users\\rylan\\Desktop\\Uni Work\\2406 Ass\\res\\Slide61.jpeg"));
+                controlPanel.add(imgLabel);
+
             }
         });
 
@@ -108,30 +115,11 @@ public class MainGUI {
             public void actionPerformed(ActionEvent e) {
                 int numPlayers = Integer.parseInt(playersChoice.getItem(playersChoice.getSelectedIndex()));
                 game.getNumPlayers(numPlayers);
-                viewHand(deck);
+
             }
         });
     }
 
-    public void viewHand(STDeck deck) {
-
-//        String[] butonNames = {};
-
-        yourTurn.setText("Here are your cards!");
-
-
-        for (int i = 0; i < 8; i++ ){//player.hand.size(); i++) {
-            JButton cardButtons = new JButton();
-            ImageIcon image = new ImageIcon("res\\Slide"+ deck.cards[players.hand.get(i) +1]);
-            cardButtons.setLayout(new FlowLayout(FlowLayout.CENTER));
-            cardButtons.setPreferredSize(new Dimension(200, 400));
-            ImageIcon images = new ImageIcon((image.getImage().getScaledInstance(200, 400, Image.SCALE_SMOOTH)));
-            cardButtons.setIcon(images);
-//            cardButtons.addActionListener();
-            controlPanel.add(cardButtons, FlowLayout.LEFT);
-        }
-
-    }
 }
 
 
